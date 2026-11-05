@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>InduPredict | Predictive Maintenance</title>
+
+    <link rel="stylesheet"
+          href="/static/styles.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+
+    <div class="header">
+
+        <h1>InduPredict</h1>
+
+        <p>
+            AI-Based Industrial Predictive Maintenance
+        </p>
+
+    </div>
+
+
+    <!-- Machine Input -->
+
+    <div class="card">
+
+        <h2>Machine Information</h2>
+
+        <form id="predictionForm">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label for="machineType">
+                        Machine Type
+                    </label>
+
+                    <select id="machineType">
+
+                        <option value="L">L</option>
+                        <option value="M">M</option>
+                        <option value="H">H</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="airTemperature">
+                        Air Temperature [K]
+                    </label>
+
+                    <input
+                        type="number"
+                        id="airTemperature"
+                        step="0.1"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="processTemperature">
+                        Process Temperature [K]
+                    </label>
+
+                    <input
+                        type="number"
+                        id="processTemperature"
+                        step="0.1"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="rotationalSpeed">
+                        Rotational Speed [rpm]
+                    </label>
+
+                    <input
+                        type="number"
+                        id="rotationalSpeed"
+                        step="1"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="torque">
+                        Torque [Nm]
+                    </label>
+
+                    <input
+                        type="number"
+                        id="torque"
+                        step="0.1"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="toolWear">
+                        Tool Wear [min]
+                    </label>
+
+                    <input
+                        type="number"
+                        id="toolWear"
+                        step="1"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="analyze-button">
+
+                Analyze Machine
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- Prediction Result -->
+
+    <div
+        id="result"
+        class="card hidden">
+
+        <h2>Prediction Result</h2>
+
+
+        <div class="result-grid">
+
+            <div class="result-box">
+
+                <h3>
+                    Machine Status
+                </h3>
+
+                <p id="prediction"></p>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <h3>
+                    Failure Probability
+                </h3>
+
+                <p id="probability"></p>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <h3>
+                    Failure Mode
+                </h3>
+
+                <p id="failureMode"></p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Model Coverage -->
+
+        <div
+            id="coverageWarning"
+            class="coverage-warning hidden">
+
+            <div class="coverage-title">
+                ⚠ Model Coverage Warning
+            </div>
+
+            <p id="coverageMessage"></p>
+
+            <div
+                id="outOfRangeInputs"
+                class="out-of-range-inputs">
+            </div>
+
+        </div>
+
+
+        <!-- Maintenance -->
+
+        <div class="maintenance">
+
+            <h3>
+                Maintenance Recommendation
+            </h3>
+
+            <p id="maintenance"></p>
+
+        </div>
+
+
+        <!-- SHAP Explanation -->
+
+        <div class="maintenance">
+
+            <h3>
+                Why did the model predict this?
+            </h3>
+
+            <p>
+                The percentages show each feature's relative influence among the top 5 factors. ↑ increases the failure prediction, while ↓ decreases it.
+            </p>
+
+            <div id="explanation"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="/static/script.js"></script>
+
+</body>
+
+</html>
